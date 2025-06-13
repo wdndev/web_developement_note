@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts" name="Count">
+
   import { ref } from "vue";
   import { useCountStore } from "@/store/count";
   import {storeToRefs} from "pinia";
@@ -24,7 +25,7 @@
 //   // 以下两种方式都可以拿到 state 中的数据
 //   console.log("@@@", countStore.sum)
 //   console.log("@@@", countStore.$state.sum)
-
+    
   // 数据
 //   let sum = ref(1) // 当前求和
   let n = ref(1)    // 用户选择的数字
