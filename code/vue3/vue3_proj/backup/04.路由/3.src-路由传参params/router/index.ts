@@ -24,18 +24,7 @@ const router = createRouter({
                 {
                     name: 'xiangqing',
                     path: 'detail/:id/:title/:content',
-                    component: Detail,
-                    // props的对象写法，作用：把对象中的每一组key-value作为props传给Detail组件
-                    // props:{a:1,b:2,c:3}, 
-
-                    // props的布尔值写法，作用：把收到了每一组params参数，作为props传给Detail组件
-                    // props:true
-                    
-                    // props的函数写法，作用：把返回的对象中每一组key-value作为props传给Detail组件
-                    props(route){
-                        console.log(route)
-                        return route.params
-                    }
+                    component: Detail
                 }
             ]
         },
