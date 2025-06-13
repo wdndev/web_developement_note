@@ -1,1 +1,1 @@
-{"root":["./src/app.vue","./src/main.ts","./src/components/header.vue","./src/pages/about.vue","./src/pages/home.vue","./src/pages/news.vue","./src/router/index.ts"],"errors":true,"version":"5.8.3"}
+{"root":["./src/app.vue","./src/main.ts","./src/components/count.vue","./src/components/lovetalk.vue","./src/store/count.ts","./src/store/lovetalk.ts"],"errors":true,"version":"5.8.3"}

@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts" name="LoveTalk">
-  import {reactive} from 'vue'
-  import axios from "axios";
-  import {nanoid} from 'nanoid'
+//   import {reactive} from 'vue'
+//   import axios from "axios";
+//   import {nanoid} from 'nanoid'
   import { useTalkStore } from '@/store/loveTalk';
   // 数据
 //   let talkList = reactive([
@@ -21,7 +21,7 @@
   const talkStore = useTalkStore()
   // 刷新不丢失
   talkStore.$subscribe((mutation, state) => { 
-    console.log("保存数据发生了变化")
+    console.log("保存数据发生了变化", mutation, state)
     localStorage.setItem('talkList', JSON.stringify(state.talkList))
   })
 

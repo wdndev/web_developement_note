@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import eslint from 'vite-plugin-eslint'
+// import eslint from 'vite-plugin-eslint'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
 import { resolve } from 'path'
 
@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     vue(), 
     VueSetupExtend(),
-    eslint()
+    // eslint()
   ],
   resolve: {
     alias: {
