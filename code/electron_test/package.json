@@ -1,0 +1,36 @@
+{
+    "name": "electron_test",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder"
+    },
+    "build": {
+        "appId": "com.atguigu.video",
+        "win": {
+            "icon": "./wdn_logo.png",
+            "target": [
+                {
+                    "target": "nsis",
+                    "arch": [
+                        "x64"
+                    ]
+                }
+            ]
+        },
+        "nsis": {
+            "oneClick": false,
+            "perMachine": true,
+            "allowToChangeInstallationDirectory": true
+        }
+    },
+    "author": "wdn",
+    "license": "ISC",
+    "description": "Electron Test",
+    "devDependencies": {
+        "electron": "^36.4.0",
+        "electron-builder": "^26.0.12",
+        "nodemon": "^3.1.10"
+    }
+}
