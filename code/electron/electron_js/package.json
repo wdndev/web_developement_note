@@ -4,7 +4,8 @@
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "build": "electron-builder"
+        "build": "electron-builder",
+        "postinstall": "node node_modules/electron/install.js"
     },
     "build": {
         "appId": "com.atguigu.video",
