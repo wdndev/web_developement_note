@@ -5,5 +5,6 @@
   - [3.类与接口](/docs/typescript/3.类与接口.md)
   - [4.泛型与类声明文件](/docs/typescript/4.泛型与类声明文件.md)
   - [5.装饰器](/docs/typescript/5.装饰器.md)
+  - [99.JavaScript%20模块化规范](/docs/typescript/99.JavaScript%20模块化规范.md)
 - [Vue3](/docs/vue3/README.md)
 - [Electron](/docs/electron/README.md)
