@@ -1,6 +1,9 @@
 console.log("preload")
 
 const { contextBridge, ipcRenderer } = require("electron")
+// 不能使用
+const fs = require("fs")
+console.log("fs ", fs)
 
 contextBridge.exposeInMainWorld("myAPI", {
     testVar: 666,
