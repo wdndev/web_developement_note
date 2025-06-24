@@ -1,5 +1,7 @@
 # Electron快速上手
 
+- 官方文档：[介绍 | Electron 中文网](https://electron.nodejs.cn/docs/latest/ "介绍 | Electron 中文网")
+
 ## 1.什么是 Electron?
 
 Electron 是一个**跨平台桌面应用开发框架**，开发者可以使用 HTML、CSS、JavaScript 等 Web 技术来构建桌面应用程序。它的本质是结合了 **Chromium** 和 **Node.js**，现在广泛用于桌面应用程序开发，例如这些桌面应用都用到了 Electron 技术：
@@ -20,7 +22,7 @@ Electron 是一个**跨平台桌面应用开发框架**，开发者可以使用 
 
 ### 3.1 技术架构
 
-![](image/image_WtuQ64MCC1.png)
+![](image/image_0CjmNNeBRs.png)
 
 - Chromium：页面渲染
 - Node.js：后台操作
@@ -30,7 +32,7 @@ Electron 是一个**跨平台桌面应用开发框架**，开发者可以使用 
 
 > 此处只是先了解一下进程模型，后面会详细讲解。
 
-![](image/image_Aa_o6PFMBj.png)
+![](image/image_9Pn7FoapU9.png)
 
 - 主进程：管理渲染进程
 - 渲染进程：浏览器环境
@@ -120,11 +122,11 @@ npm start
 
 效果如下：
 
-![](image/image_dHhIj7YkHT.png)
+![](image/image_0GLFoZh3Ip.png)
 
 ## 5. 加载本地页面
 
-（1）**创建 ****`pages/index.html`**** 和**\*\*`pages/index.css`\*\***编写内容**。
+（1）**创建 ****`pages/index.html`**** 和****`pages/index.css`****编写内容**。
 
 ```html 
 <!DOCTYPE html>
@@ -173,7 +175,7 @@ win.loadFile('./pages/index.html')
    - `style-src`：指定样式表(CSS)的加载策略。
    - `self`：仅允许从同源的资源加载，禁止从不受信任的外部来源加载，提高安全性。
    - `unsafe-inline`：允许在HTML文档内使用内联样式。
-3. **`img-src 'self' data`:**
+3. **`img-src 'self' data`****:**
    - `img-src`：指定图像资源的加载策略。
    - `self`：表示仅允许从同源加载图像。
    - `data`：允许使用 data: URI 来嵌入图像。这种URI模式允许将图像数据直接嵌入到HTML或CSS中，而不是通过外部链接引用。
@@ -224,7 +226,8 @@ npm i nodemon -D
 
 ```json 
 "scripts": {
-  "start": "nodemon --exec electron ."
+  "start": "nodemon --exec electron .",
+  "start2": "nodemon --watch main.js --exec \"electron .\""
 }
 ```
 
@@ -250,23 +253,36 @@ npm i nodemon -D
 
 Electron 应用的结构与 Chrome 浏览器的程序架构非常相似，在 Electron 中主要控制两类进程：主进程、渲染器进程。
 
+Chromium的设计里面是多进程的：
+
+- 每一个tab都是一个独立的进程，称之为 renderer process
+- 有且只有一个的进程，称之为 main process，统领了整个程序
+
+![](image/image_XqG3PqKCr1.png)
+
 ### 8.1 主进程
 
-每个 Electron 应用都有一个单一的主进程，作为应用程序的入口点。**主进程在 Node.js 环境中运行**，它具有 require 模块和使用所有 Node.js API 的能力，主进程的核心就是**使用 BrowserWindow 来创建和管理窗口**。
+每个 Electron 应用都有一个单一的主进程，作为应用程序的入口点。**主进程在 ****`Node.js`**** 环境中运行**，它具有 require 模块和使用**所有 ****`Node.js`**** API 的能力**，主进程的核心就是**使用 BrowserWindow 来创建和管理窗口**。
+
+- 窗口管理
+- 应用程序生命周期
+- 原生API
 
 ### 8.2 渲染进程
 
-每个 BrowserWindow 实例都对应一个单独的渲染器进程，运行在渲染器进程中的代码，必须遵守网页标准，这也就意味着**渲染器进程无权直接访问 require 或使用任何 Node.js 的 API**。
+每个 `BrowserWindow` 实例都对应一个单独的渲染器进程，运行在渲染器进程中的代码，必须遵守网页标准，这也就意味着**渲染器进程无权直接访问 require 或使用任何 ****`Node.js`**** 的 API**。
 
 > 问题产生：处于渲染器进程的用户界面，该怎样才与 Node.js 和 Electron 的原生桌面功能进行交互呢？
 
 ## 9. Preload 脚本
 
-预加载(Preload)脚本是运行在渲染进程中的，但它是在**网页内容加载之前**执行的，这意味着它具有比普通渲染器代码更高的权限，可以访问 Node.js 的 API，同时又可以与网页内容进行安全的交互。简单说，它是 Node.js 和 Web API 的桥梁，Preload 脚本可以安全地将部分 Node.js 功能暴露给网页，从而减少安全风险。
+预加载(Preload)脚本是运行在渲染进程中的，但它是在**网页内容加载之前**执行的，这意味着它具有比普通渲染器代码更高的权限，可以访问 `Node.js` 的 API，同时又可以与网页内容进行安全的交互。简单说，它是 `Node.js` 和 Web API 的桥梁，Preload 脚本可以安全地将部分 `Node.js` 功能暴露给网页，从而减少安全风险。
+
+![](image/image_f6tEnMJ7kw.png)
 
 > 需求示例：点击按钮后，在页面呈现当前的 Node 版本
 
-（1）\*\*创建预加载脚本 \*\***`preload.js`**
+（1）**创建预加载脚本 ****`preload.js`**
 
 ```javascript 
 console.log("preload")
@@ -279,7 +295,7 @@ contextBridge.exposeInMainWorld("myAPI", {
 ```
 
 
-（2）\*\*在主线程中引入 \*\***`preload.js`**
+（2）**在主线程中引入 ****`preload.js`**
 
 ```javascript 
 const path = require('path')
@@ -301,7 +317,7 @@ function createWindow() {
 ```
 
 
-（3）\*\*在 html 页面中编写对应按钮，并创建 \*\***`render.js`**
+（3）**在 html 页面中编写对应按钮，并创建 ****`render.js`**
 
 ```html 
 <body>
@@ -326,7 +342,7 @@ btn1.onclick  = () => {
 
 文件的整体结构：
 
-![](image/image_spVSu_uO4b.png)
+![](image/image_4O74ud3x6u.png)
 
 注意：上文中的 `preload.js` ，无法使用全部 `Node `的 API ，比如：不能使用 `Node` 中的 fs 模块，但主进程（ `main.js` ）是可以的，这时就需要**进程通信**了。简单说：要让 `preload.js` 通知 `main.js` 去调用 fs 模块去干活
 
@@ -554,7 +570,62 @@ function createWindow() {
 ```
 
 
-## 11. 打包应用
+## 11.nodeIntegration
+
+进程可以在沙盒中执行，沙盒通过限制对大多数系统资源的访问来减少恶意代码可能造成的伤害。为了执行需要额外权限的操作，沙盒处的进程通过专用通信渠道将任务下放给更大权限的进程。
+
+沙盒化应用于主进程以外的大多数进程。包括渲染进程，以及功能性进程，如音频服务、GPU服务和网络服务。
+
+```javascript 
+webPreferences: {
+    nodeIntegration: true,
+    preload: path.join(__dirname, 'preload.js')
+}
+```
+
+
+注意：禁用沙盒要特别注意安全性的问题
+
+示例：
+
+不开启沙盒，在 `preloader.js`中导入 `fs` 模块时，报错：
+
+![](image/1750128750699_BBKwFoj9A-.png)
+
+## 12.Remote模块
+
+remote模块提供了一个桥梁，可以让我们在渲染进程中直接使用主进程的属性和方法
+
+安装
+
+```javascript 
+npm install --save @electron/remote
+
+```
+
+
+初始化（`main.js`）：
+
+```javascript 
+// 初始化
+require('@electron/remote/main').initialize()
+
+// 启用 electron > 10
+require("@electron/remote/main").enable(webContents)
+
+```
+
+
+使用（`randerer.js`）
+
+```javascript 
+// 可以获取主进程的模块了
+// 它做的其实就是在 require 上面的扩展, 让它可以多一个模块可以使用
+const { dialog, BrowserWindow } = window.require('@electron/remote')
+```
+
+
+## 13. 打包应用
 
 使用 `electron-builder` 打包应用。
 
@@ -612,7 +683,7 @@ npm run build
 ```
 
 
-## 12. electron-vite
+## 14. electron-vite
 
 electron-vite 是一个新型构建工具，旨在为 Electron 提供更快、更精简的体验。主要由五部分组成：
 
@@ -623,3 +694,6 @@ electron-vite 是一个新型构建工具，旨在为 Electron 提供更快、�
 5. 使用 V8 字节码保护源代码。
 
 electron-vite 快速、简单且功能强大，旨在开箱即用。官网地址：[https://cn-evite.netlify.app/](https://cn-evite.netlify.app/ "https://cn-evite.netlify.app/")
+
+
+
