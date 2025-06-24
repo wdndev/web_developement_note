@@ -7,4 +7,5 @@
 - [3.类与接口](/docs/typescript/3.类与接口.md)
 - [4.泛型与类声明文件](/docs/typescript/4.泛型与类声明文件.md)
 - [5.装饰器](/docs/typescript/5.装饰器.md)
-- [99.JavaScript%20模块化规范](/docs/typescript/99.JavaScript%20模块化规范.md)
+- [98.包管理工具比较](/docs/typescript/98.包管理工具比较.md)
+- [99.JavaScript模块化规范](/docs/typescript/99.JavaScript模块化规范.md)
